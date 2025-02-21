@@ -2,25 +2,17 @@ import React from 'react'; // Asegúrate de importar React
 import { Avatar, AvatarGroup } from "@chakra-ui/react";
 //ESTILOS: 
 import './App.css';
-//CREO  LOS COMPONENTES
+import './index.css';
+import { TwitterFollowCard } from './TwitterFollowCard';
+
+//AÑADO LOS COMPONENTES CREADOS A LA APP PARA RETORNAR ESA APP AL INDEX. 
 export function App () {
     return (
-        <article className='tw-followCard'>
-            <header className='tw-followCard-header'>
-                <AvatarGroup>
-                    <Avatar name="Anna Pons" src="https://via.placeholder.com/150" />
-                </AvatarGroup>
-                <div className='tw-followCard-info'>
-                    <strong>Anna Pons</strong>
-                    <span className='tw-followCard-infoUserName'>@anna</span>
-                </div>
-            </header>
-
-            <aside>
-                <button className='tw-followCard-button'>
-                    Seguir
-                </button>
-            </aside>
-        </article>
+        //Si quiero devolver mas de 1 elemento envolverlo con "ReactFragment" (Si no quiero crear un div o un section directamente, uno "vacio"):
+        //El className para envolver esas card en un contenedor y aplicar estilos solo a ese contenedo, para que la card se pueda reutilizar en otro lugar y no apliquen cieros estilos: 
+        <div className='container-TwitterCard'>
+            <TwitterFollowCard isFollowing userName="anna" name="Anna Pons"></TwitterFollowCard>
+            <TwitterFollowCard isFollowing={false} userName="anna" name="Anna Pons"></TwitterFollowCard>
+        </div>
     );
 };
