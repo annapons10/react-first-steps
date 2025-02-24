@@ -4,15 +4,39 @@ import { Avatar, AvatarGroup } from "@chakra-ui/react";
 import './App.css';
 import './index.css';
 import { TwitterFollowCard } from './TwitterFollowCard';
+//Cojo los datos de los usuarios de una API con fetch.
+const users = [
+    {userName: 'midudev',
+    name: 'Miguel Ángel',
+    isFollowing: true
+    },
+    {
+        userName: 'Anna',
+        name: 'Anna Pons', 
+        isFollowing: false
+    }
+]; 
 
 //AÑADO LOS COMPONENTES CREADOS A LA APP PARA RETORNAR ESA APP AL INDEX. 
 export function App () {
+    //CREO UNA FUNCIÓN FLECHA PARA MANDAR A MI COMPONENTE Y QUE LA PUEDA USAR:
+    const formatUserName = (userName) => `@${userName}`;
     return (
-        //Si quiero devolver mas de 1 elemento envolverlo con "ReactFragment" (Si no quiero crear un div o un section directamente, uno "vacio"):
-        //El className para envolver esas card en un contenedor y aplicar estilos solo a ese contenedo, para que la card se pueda reutilizar en otro lugar y no apliquen cieros estilos: 
-        <div className='container-TwitterCard'>
-            <TwitterFollowCard isFollowing userName="anna" name="Anna Pons"></TwitterFollowCard>
-            <TwitterFollowCard isFollowing={false} userName="anna" name="Anna Pons"></TwitterFollowCard>
-        </div>
-    );
+        <section className='App'>
+            {
+                users.map(user => {
+                    const {userName, name, isFollowing} = user
+                    return (
+                        <TwitterFollowCard 
+                        key={userName} 
+                        userName={userName} 
+                        name={name} 
+                        initialIsFollowing={isFollowing} 
+                        formatUserName={formatUserName}>
+                        </TwitterFollowCard>
+                    )
+                })
+            }
+       </section>
+    )
 };
